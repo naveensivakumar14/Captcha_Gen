@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Validator</title>
+    <link rel="stylesheet" href="./style.css">
+    <!-- Google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <section class="Captcha">
+        <div class="container">
+            <h2>Captcha Validator</h2>
+            <input type="text" class="Captchacode" id="Captchacode" value=""><br>
+            <input type="text" placeholder="Enter Captcha here" id="captchaInput"><br>
+            <button id="refresh" onclick="getCaptcha()">Refresh</button>
+            <button id="check" onclick="checkCaptcha()">Check</button>
+        </div>
+    </section>
+
+    <script>
+
+        var Captchacode=document.getElementById("Captchacode");
+        var captchaInput=document.getElementById("captchaInput");
+        var refresh=document.getElementById("refresh");
+        var check=document.getElementById("check");
+
+        var captcha;
+
+        // Generate Captcha code
+        function getCaptcha(){
+            var chars="0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+
+            //to get the random single digit captcha value
+            var captcha=chars[Math.floor(Math.random()*chars.length)];
+
+            //to get the random 4 digit captcha value and stored to a captcha varibale 
+            //it already have a single digit random captcha
+            for(i=0;i<4;i++){
+                captcha=captcha+chars[Math.floor(Math.random()*chars.length)];
+            }
+            Captchacode.value=captcha;
+        }
+
+        // Check Captcha Code
+        function checkCaptcha(){
+            if(captchaInput.value==Captchacode.value){
+                alert("Success !!!, It's a Valid Captcha");
+                Captchacode.value=""
+            }
+            else{
+                alert("Invalid Captcha !!, try again");
+                Captchacode.value=""
+            }
+        }
+
+    </script>
+
+</body>
+</html>
